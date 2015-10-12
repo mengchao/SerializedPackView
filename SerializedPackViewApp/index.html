@@ -5,17 +5,18 @@
     <title></title>
     <meta charset="utf-8">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
-    <link href="styles/main.css" rel="stylesheet">
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/scanner.js"></script>
 </head>
 
 <body>
-    <div data-role="view" data-title="Serialized Pack View">
+    <div data-role="view" data-model="app.scanService.viewModel" data-title="Serialized Pack View">
         <header data-role="header">
             <div data-role="navbar">
+                <button data-role="button" data-align="right" data-bind="click: scanFrontFlip">Scan</button>
                 <span data-role="view-title"></span>
             </div>
         </header>
