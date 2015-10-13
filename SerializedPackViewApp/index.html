@@ -2,74 +2,40 @@
 <html>
 
 <head>
+    <style>
+    	img{max-width: 100%;}
+    </style>
     <title></title>
     <meta charset="utf-8">
+    <link href="cssStyle/tableStyleSheet.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/scanner.js"></script>
     <script src="scripts/DataSourceFunctions.js"></script>
-
-    <script>
-    	function init() {
-            
-            propertyListInitial();
-        }
-    </script>
+    <script src="scripts/tableCreation.js"></script>
+    <script src="scripts/scanner.js"></script>
 </head>
 
-<body onload="javascript:init()">
-    <div data-role="view" data-title="Serialized Pack View">
-        <header data-role="header">
-            <div data-role="navbar">
-                <button data-role="button" data-align="right" onclick="scanBackFlip()">Scan</button>
-                <span data-role="view-title"></span>
-            </div>
-        </header>
-        
-	<div class="table-c">
-    <table id="propertyView" width=100%>
+<body>
+    <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
+        <tr>
+        	<td><img src="images/bar1.png" /></td>
+        	<td><img src="images/bar2.png" /></td>
+        	<td><img src="images/bar3.png" /></td>
+        	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
+        </tr>
     </table>
+
+            
+
+    
+    <div class="table-c">
+        <table id="propertyView" width=100%>
+        </table>
     </div>
-    </div>
+
 	<p id=serialIdValue hidden></p>
 </body>
-<script>
-function propertyListInitial() {
-    if (document.getElementById("serialIdValue").value == undefined) {
-        return;
-    }
-    var propertyList = [];
-	var currentEle = getCurrentElem(document.getElementById("serialIdValue").value);
-    for (pro in currentEle) {
-        if (pro != "parentId") {
-            var obj = {};
-            obj.key = pro;
-            obj.value = currentEle[pro];
-            propertyList.push(obj);
-        }
-    }
-    var tableContent = "";
-    var displayLineColor = false;
-  	for(var p in propertyList) {
-        if (displayLineColor) {
-        	tableContent = tableContent + "<tr height=20px bgcolor=#add9c0>";
-            displayLineColor = false;
-        } else {
-        	tableContent = tableContent + "<tr height=20px>";
-            displayLineColor = true;
-        }
-     	for (var pp in propertyList[p]) {
-            tableContent = tableContent + "<td>" + propertyList[p][pp] + "</td>";
-     	}
-        tableContent = tableContent + "</tr>";
-  	}
-  	document.getElementById("propertyView").innerHTML = tableContent;
-}
-</script>
-<style>
-.table-c table td{border:1px solid #add9c0} 
-</style>
 </html>
