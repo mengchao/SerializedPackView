@@ -1,92 +1,80 @@
-(function (global) {
-    var ScanViewModel,
-        app = global.app = global.app || {};
+var scannedSerial = "serialIDXXXX";
 
-    ScanViewModel = kendo.data.ObservableObject.extend({
+var scanBack = function () {
+	this.scan(false, false);
+};
 
-        scanBack: function () {
-            this.scan(false, false);
-        },
+var scanBackFlip = function () {
+	this.scan(false, true);
+};
 
-        scanBackFlip: function () {
-            this.scan(false, true);
-        },
+var scanFront = function () {
+	alert("entering scan Front");
+	this.scan(true, false);
+};
 
-        scanFront: function () {
-            this.scan(true, false);
-        },
+var scanFrontFlip = function () {
+	this.scan(true, true);
+};
 
-        scanFrontFlip: function () {
-            this.scan(true, true);
-        },
+var scan = function (preferFrontCamera, showFlipCameraButton) {
+	if (!this.checkSimulator()) {
+		cordova.plugins.barcodeScanner.scan(
+			// success callback function
+			function (result) {
+				// wrapping in a timeout so the dialog doesn't free the app
+				setTimeout(function() {
+                    if (!result.cancelled) {
+                        scannedSerial = result.text;
+                    }                        
+				}, 0);
+			},
 
-        scan: function (preferFrontCamera, showFlipCameraButton) {
-            if (!this.checkSimulator()) {
-                cordova.plugins.barcodeScanner.scan(
+			// error callback function
+			function (error) {
+				alert("Scanning failed: " + error);
+			},
+			
+			// options objects
+			{
+				"preferFrontCamera" : preferFrontCamera, // default false
+				"showFlipCameraButton" : showFlipCameraButton // default false
+			}
+		);
+	}
+};
 
-                    // success callback function
-                    function (result) {
-                        // wrapping in a timeout so the dialog doesn't free the app
-                        setTimeout(function() {
-                            alert("We got a barcode\n" +
-                                  "Result: " + result.text + "\n" +
-                                  "Format: " + result.format + "\n" +
-                                  "Cancelled: " + result.cancelled);                            
-                        }, 0);
-                    },
+var encode = function () {
+	if (!this.checkSimulator()) {
+		cordova.plugins.barcodeScanner.encode(
 
-                    // error callback function
-                    function (error) {
-                        alert("Scanning failed: " + error);
-                    },
-                    
-                    // options objects
-                    {
-                        "preferFrontCamera" : preferFrontCamera, // default false
-                        "showFlipCameraButton" : showFlipCameraButton // default false
-                    }
-                );
-            }
-        },
+			// pick one of TEXT_TYPE / EMAIL_TYPE / PHONE_TYPE / SMS_TYPE
+			cordova.plugins.barcodeScanner.Encode.TEXT_TYPE,
 
-        encode: function () {
-            if (!this.checkSimulator()) {
-                cordova.plugins.barcodeScanner.encode(
+			// the thing to encode - for a link use TEXT_TYPE above
+			"http://www.telerik.com",
 
-                    // pick one of TEXT_TYPE / EMAIL_TYPE / PHONE_TYPE / SMS_TYPE
-                    cordova.plugins.barcodeScanner.Encode.TEXT_TYPE,
+			// success callback (will currently not be invoked)
+			function (result) {
+				alert("Encoding succeeded: " + result);
+			},
 
-                    // the thing to encode - for a link use TEXT_TYPE above
-                    "http://www.telerik.com",
+			// error callback
+			function (error) {
+				alert("Encoding failed: " + error);
+			}
+		);
+	}
+};
 
-                    // success callback (will currently not be invoked)
-                    function (result) {
-                        alert("Encoding succeeded: " + result);
-                    },
-
-                    // error callback
-                    function (error) {
-                        alert("Encoding failed: " + error);
-                    }
-                );
-            }
-        },
-
-        checkSimulator: function() {
-            if (window.navigator.simulator === true) {
-                alert('This plugin is not available in the simulator.');
-                return true;
-            } else if (window.cordova === undefined) {
-                alert('Plugin not found. Maybe you are running in AppBuilder Companion app which currently does not support this plugin.');
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-    });
-
-    app.scanService = {
-        viewModel: new ScanViewModel()
-    };
-})(window);
+var checkSimulator = function() {
+	if (window.navigator.simulator === true) {
+		alert('This plugin is not available in the simulator.');
+		return true;
+	} else if (window.cordova === undefined) {
+		alert('Plugin not found. Maybe you are running in AppBuilder Companion app which currently does not support this plugin.');
+		return true;
+	} else {
+		return false;
+	}
+};
