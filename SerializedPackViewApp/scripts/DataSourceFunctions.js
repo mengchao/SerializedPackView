@@ -135,3 +135,24 @@ function transData(jasonObject, serialId, parentId, children){
     }    
     return arrayTree;    
 }
+
+/*
+* load tree to display item structure
+*/
+
+var sampleTreeData = [{id: 62000001, parentId: null, item: "Desktop", weight: "13.5kg"},{id: 62000002, parentId: 62000001, item: "Moniter", weight: "2.5kg" },{ id: 62000003, parentId: 62000001, item: "Mouse", weight: "0.05kg" },{ id: 62000004, parentId: 62000001, item: "Case", weight: "5.5kg" },{ id: 62000005, parentId: 62000004, item: "Cpu", weight: "0.01kg" },{ id: 62000006, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000007, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000008, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000009, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000010, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000011, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" }];
+
+var loadTree = function () {      
+    $("#treeList").kendoTreeList({
+        columns: [
+            { field: "id",  width: 200},
+            { field: "item", width: 150 },
+            { field: "weight", width: 150 }
+        ],
+        columnMenu: true,
+        dataSource: sampleTreeData
+        
+    });
+       
+    var treeList = $("#treeList").data("kendoTreeList");
+};
