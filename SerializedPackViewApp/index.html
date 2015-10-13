@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <style>
+    	img{max-width: 100%;}
+    </style>
     <title></title>
     <meta charset="utf-8">
     <link href="cssStyle/tableStyleSheet.css" rel="stylesheet" />
@@ -16,18 +19,23 @@
 </head>
 
 <body>
-    <div data-role="view" data-title="Serialized Pack View">
-        <header data-role="header">
-            <div data-role="navbar">
-                <button data-role="button" data-align="right" onclick="scanBackFlip()">Scan</button>
-                <span data-role="view-title"></span>
-            </div>
-        </header>
-		<div class="table-c">
-            <table id="propertyView" width=100%>
-            </table>
-        </div>
+    <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
+        <tr>
+        	<td><img src="images/bar1.png" /></td>
+        	<td><img src="images/bar2.png" /></td>
+        	<td><img src="images/bar3.png" /></td>
+        	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
+        </tr>
+    </table>
+
+            
+
+    
+    <div class="table-c">
+        <table id="propertyView" width=100%>
+        </table>
     </div>
+
 	<p id=serialIdValue hidden></p>
 </body>
 </html>
