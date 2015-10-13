@@ -22,14 +22,7 @@ Element{
 
 
 */
-var sampleJasonData = eval('[{"serialId":"0001", "parentId":"0", "item":"masterItem1","desc":"masterItem1 desc","um":"BX"},
-{"serialId":"0002", "parentId":"0001", "item":"childItem2","desc":"childItem2 desc","um":"EA"},
-{"serialId":"0003", "parentId":"0001", "item":"childItem3","desc":"childItem3 desc","um":"EA"},
-{"serialId":"0004", "parentId":"0001", "item":"childItem4","desc":"childItem4 desc","um":"EA"},
-{"serialId":"0005", "parentId":"0004", "item":"grandchildItem1","desc":"grandchildItem1 desc","um":"PC"},
-{"serialId":"0006", "parentId":"0004", "item":"grandchildItem2","desc":"grandchildItem2 desc","um":"PC"},
-{"serialId":"0007", "parentId":"0002", "item":"grandchildItem3","desc":"grandchildItem3 desc","um":"PC"}
-]');
+var sampleJasonData = eval('[{"serialId":"0001", "parentId":"0", "item":"masterItem1","desc":"masterItem1 desc","um":"BX"},{"serialId":"0002", "parentId":"0001", "item":"childItem2","desc":"childItem2 desc","um":"EA"},{"serialId":"0003", "parentId":"0001", "item":"childItem3","desc":"childItem3 desc","um":"EA"},{"serialId":"0004", "parentId":"0001", "item":"childItem4","desc":"childItem4 desc","um":"EA"},{"serialId":"0005", "parentId":"0004", "item":"grandchildItem1","desc":"grandchildItem1 desc","um":"PC"},{"serialId":"0006", "parentId":"0004", "item":"grandchildItem2","desc":"grandchildItem2 desc","um":"PC"},{"serialId":"0007", "parentId":"0002", "item":"grandchildItem3","desc":"grandchildItem3 desc","um":"PC"}]');
 
 
 /**
