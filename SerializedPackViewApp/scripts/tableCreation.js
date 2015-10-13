@@ -12,9 +12,15 @@ function propertyListInitial() {
             obj.value = currentEle[pro];
             propertyList.push(obj);
         }
+        if (pro == "item") {
+            document.getElementById("itemNumberView").innerHTML = "&nbsp;&nbsp;" + currentEle[pro];
+        }
+        if (pro == "imageSrc") {
+            document.getElementById("itemImghandler").innerHTML = "<img id=itemImg src=" + currentEle[pro] + " />"
+        }
     }
     var tableContent = "";
-    var displayLineColor = false;
+    var displayLineColor = true;
   	for(var p in propertyList) {
         if (displayLineColor) {
         	tableContent = tableContent + "<tr height=20px bgcolor=#add9c0>";
