@@ -28,7 +28,11 @@
             document.getElementById("packListPage").style.display="none";
         }
         function scanBarCode() {
-        	scanBackFlip();
+            if (initialOriention == "endways") {
+        		scanBackFlip();
+            } else {
+                alert("Please hold up your phone!");
+            }
         }
     </script>
 </head>
