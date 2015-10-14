@@ -6,24 +6,24 @@
         body {
             overflow: hidden;
         }
-    	img{max-width: 100%;}
+        img {
+            max-width: 100%;
+        }
         #itemImg {
             display: block;
             position: relative;
             margin: auto;
-            max-width:90%;
-            height:auto;
+            max-width: 90%;
+            height: auto;
         }
     </style>
     <title></title>
     <meta charset="utf-8">
-    
     <link href="cssStyle/tableStyleSheet.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
-    
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="scripts/jquery.min.js"></script>
@@ -37,47 +37,71 @@
     <script src="scripts/scanner.js"></script>
     <script src="scripts/orientationChange.js"></script>
     <script>
-    	function init() {
+        function init() {
             var param = window.location.search;
             param = param.substring(param.indexOf("=") + 1);
             document.getElementById("serialIdValue").value = param;
             propertyListInitial();
         }
+
         function toPackList() {
-        	window.location.href = "packList.html?serialIdValue=" 
-                				   + document.getElementById("serialIdValue").value;
+            window.location.href = "packList.html?serialIdValue=" + document.getElementById("serialIdValue").value;
         }
+
         function toHome() {
-        	window.location.href = "index.html";
+            window.location.href = "index.html";
         }
     </script>
     <script>
-        $(document).on("swipeleft", function () {
-            var rightSer = getNextSibling(document.getElementById("serialIdValue").value);
-            if (rightSer == undefined) {
-                alert("The last item.");
-            }
-            else {
-                document.getElementById("serialIdValue").value = rightSer.id;
-                propertyListInitial();
+        $(document).kendoTouch({
+            enableSwipe: true,
+            swipe: function (e) {
+                if (e.direction == "left") {
+                    var rightSer = getNextSibling(document.getElementById("serialIdValue").value);
+                    if (rightSer == undefined) {
+                        alert("The last item.");
+                    } else {
+                        document.getElementById("serialIdValue").value = rightSer.id;
+                        propertyListInitial();
+                    }
+                } else {
+                    if (e.direction == "right") {
+                        var leftSer = getPrevSibling(document.getElementById("serialIdValue").value);
+                        if (leftSer == undefined) {
+                            alert("The first item.");
+                        } else {
+                            document.getElementById("serialIdValue").value = leftSer.id;
+                            propertyListInitial();
+                        }
+                    }
+                }
             }
         });
-        $(document).on("swiperight", function () {
-            var leftSer = getPrevSibling(document.getElementById("serialIdValue").value);
-            if (leftSer == undefined) {
-                alert("The first item.");
-            }
-            else {
-                document.getElementById("serialIdValue").value = leftSer.id;
-                propertyListInitial();
-            }
-        });
+        // $(document).on("swipeleft", function () {
+        //     var rightSer = getNextSibling(document.getElementById("serialIdValue").value);
+        //     if (rightSer == undefined) {
+        //         alert("The last item.");
+        //     }
+        //     else {
+        //         document.getElementById("serialIdValue").value = rightSer.id;
+        //         propertyListInitial();
+        //     }
+        // });
+        // $(document).on("swiperight", function () {
+        //     var leftSer = getPrevSibling(document.getElementById("serialIdValue").value);
+        //     if (leftSer == undefined) {
+        //         alert("The first item.");
+        //     }
+        //     else {
+        //         document.getElementById("serialIdValue").value = leftSer.id;
+        //         propertyListInitial();
+        //     }
+        // });
         $(document).on("swipeup", function () {
             var childSer = getFirstChild(document.getElementById("serialIdValue").value);
             if (childSer == undefined) {
                 alert("The lowest level.");
-            }
-            else {
+            } else {
                 document.getElementById("serialIdValue").value = childSer.id;
                 propertyListInitial();
             }
@@ -86,8 +110,7 @@
             var parentSer = getParentElem(document.getElementById("serialIdValue").value);
             if (parentSer == undefined) {
                 alert("The top level.");
-            }
-            else {
+            } else {
                 document.getElementById("serialIdValue").value = parentSer.id;
                 propertyListInitial();
             }
@@ -98,27 +121,30 @@
 <body onload="javascript:init()">
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-        	<td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
-        	<td><img src="images/bar2.png" /></td>
-            <td><img src="images/bar31.png"/></td>
-        	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
+            <td>
+                <a href="javascript:toHome()"><img src="images/bar1.png" />
+                </a>
+            </td>
+            <td><img src="images/bar2.png" />
+            </td>
+            <td><img src="images/bar31.png" />
+            </td>
+            <td><img src="images/bar4.png" onclick="javascript:scanBackFlip()" />
+            </td>
         </tr>
     </table>
-
     <br>
     <span id="itemImghandler"></span>
     <br>
-
     <div class="item-c">
         <font size=5px id="itemNumberView"></font>
     </div>
     <br>
-    
     <div class="table-c">
         <table id="propertyView" align=center width=92%>
         </table>
     </div>
-
-	<p id=serialIdValue hidden></p>
+    <p id=serialIdValue hidden></p>
 </body>
+
 </html>
