@@ -171,9 +171,10 @@ function getNextSibling(serialId){
 *  @return  {json}      json  
 */
 function getPrevSibling(serialId){
+  
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		if (sampleJasonData[i].id == serialId){
-			for(var j = 0 ; j < sampleJasonData.length; j++){
+			for(var j = sampleJasonData.length-1 ; j > 0 ; j--){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id < sampleJasonData[i].id ){
 			      return sampleJasonData[j];
