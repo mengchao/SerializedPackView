@@ -22,8 +22,82 @@ Element{
 
 
 */
-var sampleJasonData = eval('[{"serialId":"0001", "parentId":"0", "item":"masterItem1","desc":"masterItem1 desc","um":"BX"},{"serialId":"0002", "parentId":"0001", "item":"childItem2","desc":"childItem2 desc","um":"EA"},{"serialId":"0003", "parentId":"0001", "imageSrc":"images/Desktop.png", "item":"childItem3","desc":"childItem3 desc","um":"EA"},{"serialId":"0004", "parentId":"0001", "item":"childItem4","desc":"childItem4 desc","um":"EA"},{"serialId":"0005", "parentId":"0004", "item":"grandchildItem1","desc":"grandchildItem1 desc","um":"PC"},{"serialId":"0006", "parentId":"0004", "item":"grandchildItem2","desc":"grandchildItem2 desc","um":"PC"},{"serialId":"0007", "parentId":"0002", "item":"grandchildItem3","desc":"grandchildItem3 desc","um":"PC"}]');
-
+var sampleTreeData = [{
+	id: 62000001,
+	parentId: null,
+	item: "Desktop",
+	weight: "13.5kg",
+	price: "$999",
+	shipping_date: "09/30/15",
+	imgSrc: "images/Desktop.png"
+}, {
+	id: 62000002,
+	parentId: 62000001,
+	item: "Monitor",
+	weight: "2.5kg",
+	brand: "DELL",
+	color: "black",
+	product_dimensions: "23.6 inches",
+	resolution: "1920 x 1080",
+	imgSrc: "images/monitor.png"
+}, {
+	id: 62000003,
+	parentId: 62000001,
+	item: "Mouse",
+	weight: "0.165kg",
+	brand: "Logitech",
+	color: "soliver",
+	product_dimensions: "131*38*77(mm)",
+	wireless: "yes",
+	imgSrc: "images/mouse.jpg"
+}, {
+	id: 62000004,
+	parentId: 62000001,
+	item: "Case",
+	weight: "5.5kg",
+	brand: "DELL",
+	color: "Black",
+	product_dimensions: "433*102*360(mm)",
+	imgSrc: "images/case.jpg"
+}, {
+	id: 62000005,
+	parentId: 62000001,
+	item: "Key Board",
+	weight: "0.9kg",
+	brand: "BenQ",
+	type: "KX890",
+	color: "Black",
+	product_dimensions: "440*133*37(mm)",
+	imgSrc: "images/KeyBoard.png"
+}, {
+	id: 62000006,
+	parentId: 62000004,
+	item: "Hard Disk",
+	weight: "1.5kg",
+	brand: "Samsung",
+	product_dimensions: "145*100*19(mm)",
+	capacity: "1T",
+	imgSrc: "images/HardDisk.png"
+}, {
+	id: 62000007,
+	parentId: 62000004,
+	item: "CPU",
+	weight: "0.3kg",
+	brand: "Inter",
+	type: "i7-4790K",
+	CPU_Model_Speed: "4GHz",
+	Processor_Count: "4",
+	imgSrc: "images/cpu.jpg"
+}, {
+	id: 62000008,
+	parentId: 62000004,
+	item: "Memory",
+	weight: "0.15kg",
+	brand: "Kingston",
+	type: "204-Pin DDR3 SODIMM",
+	Capacity: "4GB",
+	imgSrc: "images/memory.png"
+}];
 
 /**
 *  use serial id to get current element 
@@ -33,7 +107,7 @@ var sampleJasonData = eval('[{"serialId":"0001", "parentId":"0", "item":"masterI
 function getCurrentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		console.log("length: "  + sampleJasonData.length);
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			return sampleJasonData[i];
 		} 
 	}
@@ -46,7 +120,7 @@ function getCurrentElem(serialId){
 */
 function getParentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[i].parentId == sampleJasonData[j].serialId){
 			      return sampleJasonData[j];
@@ -63,9 +137,9 @@ function getParentElem(serialId){
 */
 function getFirstChild(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[j].parentId == sampleJasonData[i].serialId){
+			   if (sampleJasonData[j].parentId == sampleJasonData[i].id){
 			      return sampleJasonData[j];
 			   }			
 			}	
@@ -83,7 +157,7 @@ function getNextSibling(serialId){
 		if (sampleJasonData[i].serialId == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].serialId > sampleJasonData[i].serialId ){
+			       && sampleJasonData[j].id > sampleJasonData[i].id ){
 			      return sampleJasonData[j];
 			   }		
 			}	
@@ -101,7 +175,7 @@ function getPrevSibling(serialId){
 		if (sampleJasonData[i].serialId == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].serialId < sampleJasonData[i].serialId ){
+			       && sampleJasonData[j].id < sampleJasonData[i].id ){
 			      return sampleJasonData[j];
 			   }		
 			}	
@@ -109,38 +183,9 @@ function getPrevSibling(serialId){
 	}
 }
 
-/**   
- * conver JSON to tree structure   
- * @param   {json}      jasonObject   
- * @param   {String}    serialId   
- * @param   {String}    parentId
- * @param   {String}    children 
- * @return  {Array}     array   
- */ 
-function transData(jasonObject, serialId, parentId, children){    
-    var arrayTree = [];
-    var	hash = {};
-	var i = 0, j = 0, len = jasonObject.length; 
-    for(; i < len; i++){    
-        hash[jasonObject[i][serialId]] = jasonObject[i];    
-    }    
-    for(; j < len; j++){    
-        var aVal = jasonObject[j], hashVP = hash[aVal[parentId]];		
-        if(hashVP){    
-            !hashVP[children] && (hashVP[children] = []);    
-            hashVP[children].push(aVal);    
-        }else{    
-            arrayTree.push(aVal);    
-        }    
-    }    
-    return arrayTree;    
-}
-
 /*
 * load tree to display item structure
 */
-
-var sampleTreeData = [{id: 62000001, parentId: null, item: "Desktop", weight: "13.5kg"},{id: 62000002, parentId: 62000001, item: "Moniter", weight: "2.5kg" },{ id: 62000003, parentId: 62000001, item: "Mouse", weight: "0.05kg" },{ id: 62000004, parentId: 62000001, item: "Case", weight: "5.5kg" },{ id: 62000005, parentId: 62000004, item: "Cpu", weight: "0.01kg" },{ id: 62000006, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000007, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000008, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000009, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000010, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" },{ id: 62000011, parentId: 62000004, item: "Hard Disk", weight: "0.2kg" }];
 
 var loadTree = function () {      
     $("#treeList").kendoTreeList({
