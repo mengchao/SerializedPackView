@@ -1,1 +1,15 @@
 .table-c table td{border:1px solid #add9c0}
+
+body {
+    overflow: hidden;
+}
+img {
+    max-width: 100%;
+}
+#itemImg {
+    display: block;
+    position: relative;
+    margin: auto;
+    max-width: 90%;
+    height: auto;
+}

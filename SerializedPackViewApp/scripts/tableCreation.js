@@ -1,4 +1,7 @@
 function propertyListInitial() {
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("packInfoPage").style.display="block";
+    document.getElementById("packListPage").style.display="none";
     if (document.getElementById("serialIdValue").value == undefined) {
         alert("Waring...");
         return;
