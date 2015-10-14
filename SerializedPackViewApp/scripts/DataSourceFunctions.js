@@ -22,7 +22,7 @@ Element{
 
 
 */
-var sampleTreeData = [{
+var sampleJasonData = [{
 	id: 62000001,
 	parentId: null,
 	item: "Desktop",
@@ -39,7 +39,7 @@ var sampleTreeData = [{
 	color: "black",
 	product_dimensions: "23.6 inches",
 	resolution: "1920 x 1080",
-	imgSrc: "images/monitor.png"
+	imgSrc: "images/monitor.jpg"
 }, {
 	id: 62000003,
 	parentId: 62000001,
@@ -68,7 +68,7 @@ var sampleTreeData = [{
 	type: "KX890",
 	color: "Black",
 	product_dimensions: "440*133*37(mm)",
-	imgSrc: "images/KeyBoard.png"
+	imgSrc: "images/KeyBoard.jpg"
 }, {
 	id: 62000006,
 	parentId: 62000004,
@@ -77,7 +77,7 @@ var sampleTreeData = [{
 	brand: "Samsung",
 	product_dimensions: "145*100*19(mm)",
 	capacity: "1T",
-	imgSrc: "images/HardDisk.png"
+	imgSrc: "images/HardDisk.jpg"
 }, {
 	id: 62000007,
 	parentId: 62000004,
@@ -96,7 +96,7 @@ var sampleTreeData = [{
 	brand: "Kingston",
 	type: "204-Pin DDR3 SODIMM",
 	Capacity: "4GB",
-	imgSrc: "images/memory.png"
+	imgSrc: "images/memory.jpg"
 }];
 
 /**
@@ -122,7 +122,7 @@ function getParentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[i].parentId == sampleJasonData[j].serialId){
+			   if (sampleJasonData[i].parentId == sampleJasonData[j].id){
 			      return sampleJasonData[j];
 			   }			
 			}	
@@ -154,7 +154,7 @@ function getFirstChild(serialId){
 */
 function getNextSibling(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id > sampleJasonData[i].id ){
@@ -171,9 +171,10 @@ function getNextSibling(serialId){
 *  @return  {json}      json  
 */
 function getPrevSibling(serialId){
+  
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
-			for(var j = 0 ; j < sampleJasonData.length; j++){
+		if (sampleJasonData[i].id == serialId){
+			for(var j = sampleJasonData.length-1 ; j > 0 ; j--){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id < sampleJasonData[i].id ){
 			      return sampleJasonData[j];
@@ -195,7 +196,7 @@ var loadTree = function () {
             { field: "weight", width: 150 }
         ],
         columnMenu: true,
-        dataSource: sampleTreeData
+        dataSource: sampleJasonData
         
     });
        

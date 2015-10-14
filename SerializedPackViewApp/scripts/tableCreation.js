@@ -15,24 +15,26 @@ function propertyListInitial() {
         if (pro == "item") {
             document.getElementById("itemNumberView").innerHTML = "&nbsp;&nbsp;" + currentEle[pro];
         }
-        if (pro == "imageSrc") {
+        if (pro == "imgSrc") {
             document.getElementById("itemImghandler").innerHTML = "<img id=itemImg src=" + currentEle[pro] + " />"
         }
     }
     var tableContent = "";
     var displayLineColor = true;
   	for(var p in propertyList) {
-        if (displayLineColor) {
-        	tableContent = tableContent + "<tr height=20px bgcolor=#add9c0>";
-            displayLineColor = false;
-        } else {
-        	tableContent = tableContent + "<tr height=20px>";
-            displayLineColor = true;
+        if (propertyList[p].key != "imgSrc" & propertyList[p].key != "item") {
+            if (displayLineColor) {
+                tableContent = tableContent + "<tr height=20px bgcolor=#add9c0>";
+                displayLineColor = false;
+            } else {
+                tableContent = tableContent + "<tr height=20px>";
+                displayLineColor = true;
+            }
+            for (var pp in propertyList[p]) {
+                tableContent = tableContent + "<td>" + propertyList[p][pp] + "</td>";
+            }
+            tableContent = tableContent + "</tr>";
         }
-     	for (var pp in propertyList[p]) {
-            tableContent = tableContent + "<td>" + propertyList[p][pp] + "</td>";
-     	}
-        tableContent = tableContent + "</tr>";
   	}
   	document.getElementById("propertyView").innerHTML = tableContent;
 }
