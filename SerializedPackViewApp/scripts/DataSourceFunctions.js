@@ -77,7 +77,7 @@ var sampleJasonData = [{
 	brand: "Samsung",
 	product_dimensions: "145*100*19(mm)",
 	capacity: "1T",
-	imgSrc: "images/HardDisk.png"
+	imgSrc: "images/HardDisk.jpg"
 }, {
 	id: 62000007,
 	parentId: 62000004,
@@ -122,7 +122,7 @@ function getParentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[i].parentId == sampleJasonData[j].serialId){
+			   if (sampleJasonData[i].parentId == sampleJasonData[j].id){
 			      return sampleJasonData[j];
 			   }			
 			}	
@@ -154,7 +154,7 @@ function getFirstChild(serialId){
 */
 function getNextSibling(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id > sampleJasonData[i].id ){
@@ -172,7 +172,7 @@ function getNextSibling(serialId){
 */
 function getPrevSibling(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id < sampleJasonData[i].id ){

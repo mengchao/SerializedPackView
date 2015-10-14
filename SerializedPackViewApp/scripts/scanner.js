@@ -1,4 +1,4 @@
-var scannedSerial = "0003";
+var scannedSerial = "62000002";
 
 var scanBack = function () {
     this.scan(false, false);
