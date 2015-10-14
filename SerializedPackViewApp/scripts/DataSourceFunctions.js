@@ -30,7 +30,6 @@ var sampleJasonData ;
    var data = el.data('SerialMaster'); 
    data.get()
        .then(function (data) {                           
-         //alert(JSON.stringify(data.result));      
          var tmpJsonObject = eval(data.result) ;
          
          for(var i = 0 ; i < tmpJsonObject.length; i++){
@@ -50,11 +49,8 @@ var sampleJasonData ;
             delete tmpJsonObject[i].ModifiedBy;
             delete tmpJsonObject[i].Owner;
             delete tmpJsonObject[i].Meta;  
-         }
-      
-      //alert("after process ...."   + JSON.stringify(tmpJsonObject)); 
-      sampleJasonData = eval(tmpJsonObject) ;     
-      //console.log("++++++++" + getCurrentElem("62000004") );   
+         }     
+      sampleJasonData = eval(tmpJsonObject) ;       
       },
      function (error) {
         alert(JSON.stringify(error));
@@ -150,12 +146,11 @@ var sampleJasonData = [{
 *  @param   {String}    serialId   
 *  @return  {json}      json  
 */
-function getCurrentElem(serialId){
-    
+function getCurrentElem(serialId){  
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		console.log("length: "  + sampleJasonData.length);
 		if (sampleJasonData[i].id == serialId){
-			return JSON.stringify(sampleJasonData[i]);
+			return eval(sampleJasonData[i]);
 		} 
 	}
 }
@@ -172,7 +167,7 @@ function getParentElem(serialId){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[i].parentId == sampleJasonData[j].id){
-			      return JSON.stringify(sampleJasonData[j]);
+			      return eval(sampleJasonData[j]);
 			   }			
 			}	
 		} 
@@ -189,7 +184,7 @@ function getFirstChild(serialId){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].id){
-			      return JSON.stringify(sampleJasonData[j]);
+			      return eval(sampleJasonData[j]);
 			   }			
 			}	
 		} 
@@ -207,7 +202,7 @@ function getNextSibling(serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id > sampleJasonData[i].id ){
-			      return JSON.stringify(sampleJasonData[j]);
+			      return eval(sampleJasonData[j]);
 			   }		
 			}	
 		} 
@@ -226,7 +221,7 @@ function getPrevSibling(serialId){
 			for(var j = sampleJasonData.length-1 ; j > 0 ; j--){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id < sampleJasonData[i].id ){
-			      return JSON.stringify(sampleJasonData[j]);
+			      return eval(sampleJasonData[j]);
 			   }		
 			}	
 		} 
@@ -245,7 +240,7 @@ var loadTree = function () {
             { field: "weight", width: 150 }
         ],
         columnMenu: true,
-        dataSource: sampleJasonData
+        dataSource: eval(sampleJasonData)
         
     });
        
