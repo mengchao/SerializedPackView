@@ -20,14 +20,26 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/scanner.js"></script>
     <script src="scripts/DataSourceFunctions.js"></script>
+    <script>
+    	function init() {
+            var param = window.location.search;
+            param = param.substring(param.indexOf("=") + 1);
+            document.getElementById("serialIdValue").value = param;
+            propertyListInitial();
+        }
+        function toPackInfo() {
+        	window.location.href = "packInfo.html?serialIdValue=" 
+                				   + document.getElementById("serialIdValue").value;
+        }
+    </script>
 </head>
   
-<body >
+<body onload="javascript:init()">
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-        	<td><img src="images/bar1.png" /></td>
+            <td><a href="index.html"><img src="images/bar1.png" /></a></td>
         	<td><img src="images/bar2.png" /></td>
-        	<td><a href="viewDetail.html"><img src="images/bar3.png"/></a></td>
+        	<td><a href="javascript:toPackInfo()"><img src="images/bar32.png"/></a></td>
         	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
         </tr>
     </table>
@@ -36,9 +48,10 @@
         <div id="treeList"></div>
     </table>
     
-       <script>
-           loadTree();
-        </script> 
+    <script>
+		loadTree();
+    </script> 
+	<p id=serialIdValue hidden></p>
 </body>
 
 </html>

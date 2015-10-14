@@ -26,8 +26,7 @@ var scan = function (preferFrontCamera, showFlipCameraButton) {
                 setTimeout(function () {
                     if (!result.cancelled) {
                         scannedSerial = result.text;
-                        document.getElementById("serialIdValue").value = scannedSerial;
-                        propertyListInitial();
+        				window.location.href = "packInfo.html?serialIdValue=" + scannedSerial;
                     }
                 }, 0);
             },
@@ -71,8 +70,7 @@ var encode = function () {
 
 var checkSimulator = function () {
     if (window.navigator.simulator === true) {
-        document.getElementById("serialIdValue").value = scannedSerial;
-        propertyListInitial();
+        window.location.href = "packInfo.html?serialIdValue=" + scannedSerial;
         alert('This plugin is not available in the simulator.');
         return true;
     } else if (window.cordova === undefined) {
