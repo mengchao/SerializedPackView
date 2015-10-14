@@ -22,7 +22,7 @@ Element{
 
 
 */
-var sampleTreeData = [{
+var sampleJasonData = [{
 	id: 62000001,
 	parentId: null,
 	item: "Desktop",
@@ -195,7 +195,7 @@ var loadTree = function () {
             { field: "weight", width: 150 }
         ],
         columnMenu: true,
-        dataSource: sampleTreeData
+        dataSource: sampleJasonData
         
     });
        
