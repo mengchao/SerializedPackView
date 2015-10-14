@@ -39,7 +39,7 @@ var sampleJasonData = [{
 	color: "black",
 	product_dimensions: "23.6 inches",
 	resolution: "1920 x 1080",
-	imgSrc: "images/monitor.png"
+	imgSrc: "images/monitor.jpg"
 }, {
 	id: 62000003,
 	parentId: 62000001,
@@ -68,7 +68,7 @@ var sampleJasonData = [{
 	type: "KX890",
 	color: "Black",
 	product_dimensions: "440*133*37(mm)",
-	imgSrc: "images/KeyBoard.png"
+	imgSrc: "images/KeyBoard.jpg"
 }, {
 	id: 62000006,
 	parentId: 62000004,
@@ -96,7 +96,7 @@ var sampleJasonData = [{
 	brand: "Kingston",
 	type: "204-Pin DDR3 SODIMM",
 	Capacity: "4GB",
-	imgSrc: "images/memory.png"
+	imgSrc: "images/memory.jpg"
 }];
 
 /**
