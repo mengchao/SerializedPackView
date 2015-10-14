@@ -32,7 +32,7 @@ var sampleTreeData = [{id: 62000001, parentId: null, item: "Desktop", weight: "1
 function getCurrentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		console.log("length: "  + sampleJasonData.length);
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			return sampleJasonData[i];
 		} 
 	}
@@ -45,7 +45,7 @@ function getCurrentElem(serialId){
 */
 function getParentElem(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[i].parentId == sampleJasonData[j].serialId){
 			      return sampleJasonData[j];
@@ -62,9 +62,9 @@ function getParentElem(serialId){
 */
 function getFirstChild(serialId){
 	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].serialId == serialId){
+		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[j].parentId == sampleJasonData[i].serialId){
+			   if (sampleJasonData[j].parentId == sampleJasonData[i].id){
 			      return sampleJasonData[j];
 			   }			
 			}	
@@ -82,7 +82,7 @@ function getNextSibling(serialId){
 		if (sampleJasonData[i].serialId == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].serialId > sampleJasonData[i].serialId ){
+			       && sampleJasonData[j].id > sampleJasonData[i].id ){
 			      return sampleJasonData[j];
 			   }		
 			}	
@@ -100,39 +100,12 @@ function getPrevSibling(serialId){
 		if (sampleJasonData[i].serialId == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].serialId < sampleJasonData[i].serialId ){
+			       && sampleJasonData[j].id < sampleJasonData[i].id ){
 			      return sampleJasonData[j];
 			   }		
 			}	
 		} 
 	}
-}
-
-/**   
- * conver JSON to tree structure   
- * @param   {json}      jasonObject   
- * @param   {String}    serialId   
- * @param   {String}    parentId
- * @param   {String}    children 
- * @return  {Array}     array   
- */ 
-function transData(jasonObject, serialId, parentId, children){    
-    var arrayTree = [];
-    var	hash = {};
-	var i = 0, j = 0, len = jasonObject.length; 
-    for(; i < len; i++){    
-        hash[jasonObject[i][serialId]] = jasonObject[i];    
-    }    
-    for(; j < len; j++){    
-        var aVal = jasonObject[j], hashVP = hash[aVal[parentId]];		
-        if(hashVP){    
-            !hashVP[children] && (hashVP[children] = []);    
-            hashVP[children].push(aVal);    
-        }else{    
-            arrayTree.push(aVal);    
-        }    
-    }    
-    return arrayTree;    
 }
 
 /*
