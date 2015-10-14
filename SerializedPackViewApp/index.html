@@ -23,8 +23,16 @@
     <script src="scripts/gesture.js"></script>
     <script>
         function toHome() {
+            document.getElementById("homePage").style.display="block";
             document.getElementById("packInfoPage").style.display="none";
             document.getElementById("packListPage").style.display="none";
+        }
+        function scanBarCode() {
+            if (document.getElementById("packInfoPage").style.display == "block") {
+            	scanBackFlip();
+            } else {
+                alert("Please hold up the phone!");
+            }
         }
     </script>
 </head>
@@ -36,9 +44,13 @@
             <td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
             <td><img src="images/bar2.png" /></td>
             <td><img src="images/bar30.png" /></td>
-            <td><img src="images/bar4.png" onclick="javascript:scanBackFlip()" /></td>
+            <td><img src="images/bar4.png" onclick="javascript:scanBarCode()" /></td>
         </tr>
     </table>
+    
+    <div id="homePage" style="display:block;">
+        Welcome!
+    </div>
 	
     <div id="packInfoPage" style="display:none;">
         <br>

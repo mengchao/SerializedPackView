@@ -4,12 +4,16 @@ function doOnOrientationChange()
     {  
       case -90:
       case 90:
-        document.getElementById("packInfoPage").style.display="none";
-        document.getElementById("packListPage").style.display="block";
+        if (document.getElementById("homePage").style.display != "block") {
+            document.getElementById("packInfoPage").style.display="none";
+            document.getElementById("packListPage").style.display="block";
+        }
         break; 
       default:
-        document.getElementById("packInfoPage").style.display="block";
-        document.getElementById("packListPage").style.display="none";
+        if (document.getElementById("homePage").style.display != "block") {
+            document.getElementById("packInfoPage").style.display="block";
+            document.getElementById("packListPage").style.display="none";
+        }
         break; 
     }
   }
