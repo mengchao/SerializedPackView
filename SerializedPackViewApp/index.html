@@ -2,10 +2,6 @@
 <html>
 
 <head>
-    <style>
-    	img{max-width: 100%;}
-    </style>
-    <title></title>
     <meta charset="utf-8">
     <link href="cssStyle/tableStyleSheet.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
@@ -14,22 +10,59 @@
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.mobile-1.3.2.min.js"></script>
+    <script src="scripts/swipeupdown.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="kendo/js/kendo.all.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/DataSourceFunctions.js"></script>
     <script src="scripts/tableCreation.js"></script>
     <script src="scripts/scanner.js"></script>
+    <script src="scripts/orientationChange.js"></script>
+    <script src="scripts/gesture.js"></script>
+    <script>
+        function toPackList() {
+        }
+        function toHome() {
+            document.getElementById("packInfoPage").style.display="none";
+            document.getElementById("packListPage").style.display="none";
+        }
+    </script>
 </head>
 
 <body>
+    <p id=serialIdValue hidden></p>
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-        	<td><img src="images/bar1.png" /></td>
-        	<td><img src="images/bar2.png" /></td>
-        	<td><img src="images/bar30.png"/></td>
-        	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
+            <td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
+            <td><img src="images/bar2.png" /></td>
+            <td><img src="images/bar30.png" /></td>
+            <td><img src="images/bar4.png" onclick="javascript:scanBackFlip()" /></td>
         </tr>
     </table>
+	
+    <div id="packInfoPage" style="display:none;">
+        <br>
+        <span id="itemImghandler"></span>
+        <br>
+        <div class="item-c">
+            <font size=5px id="itemNumberView"></font>
+        </div>
+        <br>
+        <div class="table-c">
+            <table id="propertyView" align=center width=92%>
+            </table>
+        </div>
+    </div>
+    
+    <div id="packListPage" style="display:none;">
+        <table border=0 cellspacing=0 cellpadding=0 >
+            <div id="treeList"></div>
+        </table>
+    </div>
 </body>
+<script>
+    loadTree();
+</script> 
 </html>

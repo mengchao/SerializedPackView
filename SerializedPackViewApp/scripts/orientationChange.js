@@ -4,12 +4,12 @@ function doOnOrientationChange()
     {  
       case -90:
       case 90:
-        window.location.href = "packList.html?serialIdValue=" 
-                               + document.getElementById("serialIdValue").value;
+        document.getElementById("packInfoPage").style.display="none";
+        document.getElementById("packListPage").style.display="block";
         break; 
       default:
-        window.location.href = "packInfo.html?serialIdValue=" 
-                               + document.getElementById("serialIdValue").value;
+        document.getElementById("packInfoPage").style.display="block";
+        document.getElementById("packListPage").style.display="none";
         break; 
     }
   }
