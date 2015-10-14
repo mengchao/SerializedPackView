@@ -2,34 +2,56 @@
 <html>
 
 <head>
-    <style>
+     <style>
     	img{max-width: 100%;}
     </style>
     <title></title>
     <meta charset="utf-8">
+    
     <link href="cssStyle/tableStyleSheet.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
+
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="kendo/js/kendo.all.min.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/DataSourceFunctions.js"></script>
-    <script src="scripts/tableCreation.js"></script>
     <script src="scripts/scanner.js"></script>
+    <script src="scripts/DataSourceFunctions.js"></script>
+    <script>
+    	function init() {
+            var param = window.location.search;
+            param = param.substring(param.indexOf("=") + 1);
+            document.getElementById("serialIdValue").value = param;
+            propertyListInitial();
+        }
+        function toPackInfo() {
+        	window.location.href = "packInfo.html?serialIdValue=" 
+                				   + document.getElementById("serialIdValue").value;
+        }
+    </script>
 </head>
-
-<body>
+  
+<body onload="javascript:init()">
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-        	<td><img src="images/bar1.png" /></td>
+            <td><a href="index.html"><img src="images/bar1.png" /></a></td>
         	<td><img src="images/bar2.png" /></td>
-        	<td><img src="images/bar30.png"/></td>
+        	<td><a href="javascript:toPackInfo()"><img src="images/bar32.png"/></a></td>
         	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
         </tr>
     </table>
+    
+    <table border=0 cellspacing=0 cellpadding=0 >
+        <div id="treeList"></div>
+    </table>
+    
+    <script>
+		loadTree();
+    </script> 
+	<p id=serialIdValue hidden></p>
 </body>
+
 </html>
