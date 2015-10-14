@@ -46,19 +46,50 @@
         	window.location.href = "packList.html?serialIdValue=" 
                 				   + document.getElementById("serialIdValue").value;
         }
+        function toHome() {
+        	window.location.href = "index.html";
+        }
     </script>
     <script>
         $(document).on("swipeleft", function () {
-            alert("swipe");
+            var rightSer = getNextSibling(document.getElementById("serialIdValue").value);
+            if (rightSer == undefined) {
+                alert("The last item.");
+            }
+            else {
+                document.getElementById("serialIdValue").value = rightSer.serialId;
+                propertyListInitial();
+            }
         });
         $(document).on("swiperight", function () {
-            alert("swipe");
+            var leftSer = getPrevSibling(document.getElementById("serialIdValue").value);
+            if (leftSer == undefined) {
+                alert("The first item.");
+            }
+            else {
+                document.getElementById("serialIdValue").value = leftSer.serialId;
+                propertyListInitial();
+            }
         });
         $(document).on("swipeup", function () {
-            alert("swipe");
+            var childSer = getFirstChild(document.getElementById("serialIdValue").value);
+            if (childSer == undefined) {
+                alert("The lowest level.");
+            }
+            else {
+                document.getElementById("serialIdValue").value = childSer.serialId;
+                propertyListInitial();
+            }
         });
         $(document).on("swipedown", function () {
-            alert("swipe");
+            var parentSer = getParentElem(document.getElementById("serialIdValue").value);
+            if (parentSer == undefined) {
+                alert("The top level.");
+            }
+            else {
+                document.getElementById("serialIdValue").value = parentSer.serialId;
+                propertyListInitial();
+            }
         });
     </script>
 </head>
@@ -66,7 +97,7 @@
 <body onload="javascript:init()">
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-        	<td><a href="index.html"><img src="images/bar1.png" /></a></td>
+        	<td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
         	<td><img src="images/bar2.png" /></td>
             <td><a href="javascript:toPackList()"><img src="images/bar31.png"/></a></td>
         	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>

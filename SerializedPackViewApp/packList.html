@@ -31,13 +31,16 @@
         	window.location.href = "packInfo.html?serialIdValue=" 
                 				   + document.getElementById("serialIdValue").value;
         }
+        function toHome() {
+        	window.location.href = "index.html";
+        }
     </script>
 </head>
   
 <body onload="javascript:init()">
     <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-            <td><a href="index.html"><img src="images/bar1.png" /></a></td>
+        	<td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
         	<td><img src="images/bar2.png" /></td>
         	<td><a href="javascript:toPackInfo()"><img src="images/bar32.png"/></a></td>
         	<td><img src="images/bar4.png" onclick="javascript:scanBackFlip()"/></td>
