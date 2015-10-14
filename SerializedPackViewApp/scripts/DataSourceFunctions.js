@@ -22,6 +22,50 @@ Element{
 
 
 */
+var sampleJasonData ;
+
+(function() {
+   var apiKey = "w8BNCS5DnlNZ2hie";
+   var el = new Everlive(apiKey);
+   var data = el.data('SerialMaster'); 
+   data.get()
+       .then(function (data) {                           
+         //alert(JSON.stringify(data.result));      
+         var tmpJsonObject = eval(data.result) ;
+         
+         for(var i = 0 ; i < tmpJsonObject.length; i++){
+            tmpJsonObject[i].id = tmpJsonObject[i].Serial_Id ;
+            tmpJsonObject[i].parentId = tmpJsonObject[i].Parent_Id ;
+            tmpJsonObject[i].imgSrc =  tmpJsonObject[i].Img_Src ;
+   
+            delete tmpJsonObject[i].Id;
+            delete tmpJsonObject[i].Parent_Id;
+            delete tmpJsonObject[i].Img_Src; 
+            delete tmpJsonObject[i].Item;
+            delete tmpJsonObject[i].Weight;
+            delete tmpJsonObject[i].Serial_Id;
+            delete tmpJsonObject[i].CreatedAt;
+            delete tmpJsonObject[i].ModifiedAt;
+            delete tmpJsonObject[i].CreatedBy;
+            delete tmpJsonObject[i].ModifiedBy;
+            delete tmpJsonObject[i].Owner;
+            delete tmpJsonObject[i].Meta;  
+         }
+      
+      //alert("after process ...."   + JSON.stringify(tmpJsonObject)); 
+      sampleJasonData = eval(tmpJsonObject) ;     
+      //console.log("++++++++" + getCurrentElem("62000004") );   
+      },
+     function (error) {
+        alert(JSON.stringify(error));
+     });
+   
+}());
+
+
+
+
+/*
 var sampleJasonData = [{
 	id: 62000001,
 	parentId: null,
@@ -99,19 +143,24 @@ var sampleJasonData = [{
 	imgSrc: "images/memory.jpg"
 }];
 
+
+
 /**
 *  use serial id to get current element 
 *  @param   {String}    serialId   
 *  @return  {json}      json  
 */
 function getCurrentElem(serialId){
+    
 	for(var i = 0 ; i < sampleJasonData.length; i++){
 		console.log("length: "  + sampleJasonData.length);
 		if (sampleJasonData[i].id == serialId){
-			return sampleJasonData[i];
+			return JSON.stringify(sampleJasonData[i]);
 		} 
 	}
 }
+
+
 
 /**
 *  use serial id to get parent element 
@@ -123,7 +172,7 @@ function getParentElem(serialId){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[i].parentId == sampleJasonData[j].id){
-			      return sampleJasonData[j];
+			      return JSON.stringify(sampleJasonData[j]);
 			   }			
 			}	
 		} 
@@ -140,7 +189,7 @@ function getFirstChild(serialId){
 		if (sampleJasonData[i].id == serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].id){
-			      return sampleJasonData[j];
+			      return JSON.stringify(sampleJasonData[j]);
 			   }			
 			}	
 		} 
@@ -158,7 +207,7 @@ function getNextSibling(serialId){
 			for(var j = 0 ; j < sampleJasonData.length; j++){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id > sampleJasonData[i].id ){
-			      return sampleJasonData[j];
+			      return JSON.stringify(sampleJasonData[j]);
 			   }		
 			}	
 		} 
@@ -177,7 +226,7 @@ function getPrevSibling(serialId){
 			for(var j = sampleJasonData.length-1 ; j > 0 ; j--){
 			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
 			       && sampleJasonData[j].id < sampleJasonData[i].id ){
-			      return sampleJasonData[j];
+			      return JSON.stringify(sampleJasonData[j]);
 			   }		
 			}	
 		} 
@@ -188,7 +237,7 @@ function getPrevSibling(serialId){
 * load tree to display item structure
 */
 
-var loadTree = function () {      
+var loadTree = function () { 
     $("#treeList").kendoTreeList({
         columns: [
             { field: "id",  width: 200},
@@ -202,3 +251,5 @@ var loadTree = function () {
        
     var treeList = $("#treeList").data("kendoTreeList");
 };
+
+
