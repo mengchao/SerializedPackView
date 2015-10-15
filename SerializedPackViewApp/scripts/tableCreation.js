@@ -15,7 +15,7 @@ function propertyListInitial() {
             obj.value = currentEle[pro];
             propertyList.push(obj);
         }
-        if (pro == "item") {
+        if (pro == "Item") {
             document.getElementById("itemNumberView").innerHTML = "&nbsp;&nbsp;" + currentEle[pro];
         }
         if (pro == "imgSrc") {
@@ -25,7 +25,7 @@ function propertyListInitial() {
     var tableContent = "";
     var displayLineColor = true;
   	for(var p in propertyList) {
-        if (propertyList[p].key != "imgSrc" & propertyList[p].key != "item") {
+        if (propertyList[p].key != "imgSrc" & propertyList[p].key != "Item") {
             if (displayLineColor) {
                 tableContent = tableContent + "<tr height=20px bgcolor=#add9c0>";
                 displayLineColor = false;
