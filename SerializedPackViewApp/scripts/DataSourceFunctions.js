@@ -1,4 +1,3 @@
-
 /*
 Data Structure :
 Element{
@@ -22,39 +21,60 @@ Element{
 
 
 */
-var sampleJasonData ;
+var sampleJasonData;
 
-(function() {
-   var apiKey = "w8BNCS5DnlNZ2hie";
-   var el = new Everlive(apiKey);
-   var data = el.data('SerialMaster'); 
-   data.get()
-       .then(function (data) {                           
-         var tmpJsonObject = eval(data.result) ;
-         
-         for(var i = 0 ; i < tmpJsonObject.length; i++){
-            tmpJsonObject[i].id = tmpJsonObject[i].Serial_Id ;
-            tmpJsonObject[i].parentId = tmpJsonObject[i].Parent_Id ;
-            tmpJsonObject[i].imgSrc =  tmpJsonObject[i].Img_Src ;
-   
-            delete tmpJsonObject[i].Id;
-            delete tmpJsonObject[i].Parent_Id;
-            delete tmpJsonObject[i].Img_Src; 
-            delete tmpJsonObject[i].Weight;
-            delete tmpJsonObject[i].Serial_Id;
-            delete tmpJsonObject[i].CreatedAt;
-            delete tmpJsonObject[i].ModifiedAt;
-            delete tmpJsonObject[i].CreatedBy;
-            delete tmpJsonObject[i].ModifiedBy;
-            delete tmpJsonObject[i].Owner;
-            delete tmpJsonObject[i].Meta;  
-         }     
-      sampleJasonData = eval(tmpJsonObject) ;       
-      },
-     function (error) {
-        alert(JSON.stringify(error));
-     });
-   
+
+(function () {
+    var apiKey = "w8BNCS5DnlNZ2hie";
+    var el = new Everlive(apiKey);
+    var data = el.data('SerialMaster');
+    data.get()
+        .then(function (data) {
+                var tmpJsonObject = eval(data.result);
+
+                for (var i = 0; i < tmpJsonObject.length; i++) {
+                    tmpJsonObject[i].id = tmpJsonObject[i].Serial_Id;
+                    tmpJsonObject[i].parentId = tmpJsonObject[i].Parent_Id;
+                    tmpJsonObject[i].imgSrc = tmpJsonObject[i].Img_Src;
+
+                    delete tmpJsonObject[i].Id;
+                    delete tmpJsonObject[i].Parent_Id;
+                    delete tmpJsonObject[i].Img_Src;
+                    delete tmpJsonObject[i].Serial_Id;
+                    delete tmpJsonObject[i].CreatedAt;
+                    delete tmpJsonObject[i].ModifiedAt;
+                    delete tmpJsonObject[i].CreatedBy;
+                    delete tmpJsonObject[i].ModifiedBy;
+                    delete tmpJsonObject[i].Owner;
+                    delete tmpJsonObject[i].Meta;
+                }
+                sampleJasonData = eval(tmpJsonObject);
+
+                $("#treeList").kendoTreeList({
+                    columns: [
+                        {
+                            field: "id",
+                            width: 200
+                        },
+                        {
+                            field: "Item",
+                            width: 150
+                        },
+                        {
+                            field: "Weight",
+                            width: 150
+                        }
+],
+                    columnMenu: true,
+                    dataSource: sampleJasonData
+                });
+
+                var treeList = $("#treeList").data("kendoTreeList");
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            });
+
 }());
 
 
@@ -145,105 +165,110 @@ var sampleJasonData = [{
 *  @param   {String}    serialId   
 *  @return  {json}      json  
 */
-function getCurrentElem(serialId){  
-	for(var i = 0 ; i < sampleJasonData.length; i++){
-		console.log("length: "  + sampleJasonData.length);
-		if (sampleJasonData[i].id == serialId){
-			return eval(sampleJasonData[i]);
-		} 
-	}
+function getCurrentElem(serialId) {
+    for (var i = 0; i < sampleJasonData.length; i++) {
+        console.log("length: " + sampleJasonData.length);
+        if (sampleJasonData[i].id == serialId) {
+            return eval(sampleJasonData[i]);
+        }
+    }
 }
 
 
 
 /**
-*  use serial id to get parent element 
-*  @param   {String}    serialId   
-*  @return  {json}      json  
-*/
-function getParentElem(serialId){
-	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].id == serialId){
-			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[i].parentId == sampleJasonData[j].id){
-			      return eval(sampleJasonData[j]);
-			   }			
-			}	
-		} 
-	}
+ *  use serial id to get parent element
+ *  @param   {String}    serialId
+ *  @return  {json}      json
+ */
+function getParentElem(serialId) {
+    for (var i = 0; i < sampleJasonData.length; i++) {
+        if (sampleJasonData[i].id == serialId) {
+            for (var j = 0; j < sampleJasonData.length; j++) {
+                if (sampleJasonData[i].parentId == sampleJasonData[j].id) {
+                    return eval(sampleJasonData[j]);
+                }
+            }
+        }
+    }
 }
 
 /**
-*  use serial id to get first child element 
-*  @param   {String}    serialId   
-*  @return  {json}      json  
-*/
-function getFirstChild(serialId){
-	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].id == serialId){
-			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[j].parentId == sampleJasonData[i].id){
-			      return eval(sampleJasonData[j]);
-			   }			
-			}	
-		} 
-	}
+ *  use serial id to get first child element
+ *  @param   {String}    serialId
+ *  @return  {json}      json
+ */
+function getFirstChild(serialId) {
+    for (var i = 0; i < sampleJasonData.length; i++) {
+        if (sampleJasonData[i].id == serialId) {
+            for (var j = 0; j < sampleJasonData.length; j++) {
+                if (sampleJasonData[j].parentId == sampleJasonData[i].id) {
+                    return eval(sampleJasonData[j]);
+                }
+            }
+        }
+    }
 }
 
 /**
-*  use serial id to get next sibling 
-*  @param   {String}    serialId   
-*  @return  {json}      json  
-*/
-function getNextSibling(serialId){
-	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].id == serialId){
-			for(var j = 0 ; j < sampleJasonData.length; j++){
-			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].id > sampleJasonData[i].id ){
-			      return eval(sampleJasonData[j]);
-			   }		
-			}	
-		} 
-	}
+ *  use serial id to get next sibling
+ *  @param   {String}    serialId
+ *  @return  {json}      json
+ */
+function getNextSibling(serialId) {
+    for (var i = 0; i < sampleJasonData.length; i++) {
+        if (sampleJasonData[i].id == serialId) {
+            for (var j = 0; j < sampleJasonData.length; j++) {
+                if (sampleJasonData[j].parentId == sampleJasonData[i].parentId && sampleJasonData[j].id > sampleJasonData[i].id) {
+                    return eval(sampleJasonData[j]);
+                }
+            }
+        }
+    }
 }
 
 /**
-*  use serial id to get previous sibling 
-*  @param   {String}    serialId   
-*  @return  {json}      json  
-*/
-function getPrevSibling(serialId){
-  
-	for(var i = 0 ; i < sampleJasonData.length; i++){
-		if (sampleJasonData[i].id == serialId){
-			for(var j = sampleJasonData.length-1 ; j > 0 ; j--){
-			   if (sampleJasonData[j].parentId == sampleJasonData[i].parentId 
-			       && sampleJasonData[j].id < sampleJasonData[i].id ){
-			      return eval(sampleJasonData[j]);
-			   }		
-			}	
-		} 
-	}
+ *  use serial id to get previous sibling
+ *  @param   {String}    serialId
+ *  @return  {json}      json
+ */
+function getPrevSibling(serialId) {
+
+    for (var i = 0; i < sampleJasonData.length; i++) {
+        if (sampleJasonData[i].id == serialId) {
+            for (var j = sampleJasonData.length - 1; j > 0; j--) {
+                if (sampleJasonData[j].parentId == sampleJasonData[i].parentId && sampleJasonData[j].id < sampleJasonData[i].id) {
+                    return eval(sampleJasonData[j]);
+                }
+            }
+        }
+    }
 }
 
 /*
-* load tree to display item structure
-*/
+ * load tree to display item structure
+ 
 
-var loadTree = function () { 
+var loadTree = function () {
     $("#treeList").kendoTreeList({
         columns: [
-            { field: "id",  width: 200},
-            { field: "Item", width: 150 },
-            { field: "Weight", width: 150 }
+            {
+                field: "id",
+                width: 200
+            },
+            {
+                field: "Item",
+                width: 150
+            },
+            {
+                field: "Weight",
+                width: 150
+            }
         ],
         columnMenu: true,
         dataSource: sampleJasonData
-        
+
     });
-       
+
     var treeList = $("#treeList").data("kendoTreeList");
-};
-
-
+};  */
