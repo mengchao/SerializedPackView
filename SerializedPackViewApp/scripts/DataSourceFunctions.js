@@ -40,7 +40,6 @@ var sampleJasonData ;
             delete tmpJsonObject[i].Id;
             delete tmpJsonObject[i].Parent_Id;
             delete tmpJsonObject[i].Img_Src; 
-            delete tmpJsonObject[i].Item;
             delete tmpJsonObject[i].Weight;
             delete tmpJsonObject[i].Serial_Id;
             delete tmpJsonObject[i].CreatedAt;
@@ -236,11 +235,11 @@ var loadTree = function () {
     $("#treeList").kendoTreeList({
         columns: [
             { field: "id",  width: 200},
-            { field: "item", width: 150 },
-            { field: "weight", width: 150 }
+            { field: "Item", width: 150 },
+            { field: "Weight", width: 150 }
         ],
         columnMenu: true,
-        dataSource: eval(sampleJasonData)
+        dataSource: sampleJasonData
         
     });
        
