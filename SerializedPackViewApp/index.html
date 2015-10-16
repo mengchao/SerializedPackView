@@ -47,7 +47,7 @@
 
 <body onload="javascript:init()">
     <p id=serialIdValue hidden></p>
-    <table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
+    <table id=barTable width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
             <td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
             <td id=imgTwo></td>
@@ -79,9 +79,9 @@
     </div>
     
     <div id="packListPage" style="display:none;">
-        <table border=0 cellspacing=0 cellpadding=0 >
+        <div id=listDiv style="width:100%;overflow-x:auto;overflow-y:auto;">
             <div id="treeList"></div>
-        </table>
+        </div>
     </div>
 </body>
 <script>

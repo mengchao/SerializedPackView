@@ -66,6 +66,7 @@ var sampleJasonData;
                         }
 ],
                     columnMenu: true,
+                    scrollable: false,
                     dataSource: sampleJasonData
                 });
 

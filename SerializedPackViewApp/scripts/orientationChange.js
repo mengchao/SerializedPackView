@@ -12,6 +12,10 @@ function doOnOrientationChange()
             document.getElementById("packListPage").style.display="block";
         }
         document.getElementById("imgTwo").innerHTML = "<img src='images/bar22.png' />";
+
+        var listDivHeight = document.body.offsetHeight
+                            - document.getElementById("barTable").offsetHeight;
+        document.getElementById("listDiv").style.height = listDivHeight + 10 + 'px';
         break; 
       default:
         initialOriention = "endways";
