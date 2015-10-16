@@ -11,6 +11,7 @@ function doOnOrientationChange()
             document.getElementById("packInfoPage").style.display="none";
             document.getElementById("packListPage").style.display="block";
         }
+        document.getElementById("imgTwo").innerHTML = "<img src='images/bar22.png' />";
         break; 
       default:
         initialOriention = "endways";
@@ -18,6 +19,7 @@ function doOnOrientationChange()
             document.getElementById("packInfoPage").style.display="block";
             document.getElementById("packListPage").style.display="none";
         }
+        document.getElementById("imgTwo").innerHTML = "<img src='images/bar2.png' />";
         break; 
     }
   }

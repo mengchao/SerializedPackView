@@ -35,15 +35,22 @@
                 alert("Please hold up your phone!");
             }
         }
+        function init() {
+            if (initialOriention == "endways") {
+        		document.getElementById("imgTwo").innerHTML = "<img src='images/bar2.png' />";
+            } else {
+        		document.getElementById("imgTwo").innerHTML = "<img src='images/bar22.png' />";
+            }
+        }
     </script>
 </head>
 
-<body>
+<body onload="javascript:init()">
     <p id=serialIdValue hidden></p>
-    <table border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
+    <table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
             <td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
-            <td><img src="images/bar2.png" /></td>
+            <td id=imgTwo></td>
             <td><img src="images/bar30.png" /></td>
             <td><img src="images/bar4.png" onclick="javascript:scanBarCode()" /></td>
         </tr>
@@ -51,7 +58,7 @@
     
     <div id="homePage" style="display:block;">
         <table border=0 width=100%>
-            <tr><td>
+            <tr><td align=center>
 				<img src="images/homeSample.gif" />
             </td></tr>
         </table>
