@@ -12,6 +12,22 @@ function propertyListInitial() {
         if (pro != "parentId") {
             var obj = {};
             obj.key = pro;
+            if (pro == "id") {
+                obj.key = "ID";
+            }
+            else if (pro == "Product_Dimensions"){
+                obj.key = "Product Dimensions";
+            }
+            else if (pro == "Shipping_Data"){
+                obj.key = "Shipping Date";
+            }
+            else if (pro == "CPU_Model_Speed"){
+                obj.key = "CPU Model Speed";
+            }
+            else if (pro == "Processor_Count"){
+                obj.key = "Processor Count";
+            }
+            
             obj.value = currentEle[pro];
             propertyList.push(obj);
         }
