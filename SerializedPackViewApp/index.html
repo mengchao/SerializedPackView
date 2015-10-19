@@ -37,9 +37,9 @@
         }
         function init() {
             if (initialOriention == "endways") {
-        		document.getElementById("imgTwo").innerHTML = "<img src='images/bar2.png' />";
+        		document.getElementById("imgTwo").innerHTML = "<img border=1 src='images/bar2.png' />";
             } else {
-        		document.getElementById("imgTwo").innerHTML = "<img src='images/bar22.png' />";
+        		document.getElementById("imgTwo").innerHTML = "<img border=1 src='images/bar22.png' />";
             }
         }
     </script>
@@ -47,19 +47,29 @@
 
 <body onload="javascript:init()">
     <p id=serialIdValue hidden></p>
-    <table id=barTable width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#31849B>
+    <table id=barTable width=100% border=1 cellspacing=0 cellpadding=0 bgcolor=#31849B>
         <tr>
-            <td><a href="javascript:toHome()"><img src="images/bar1.png" /></a></td>
+            <td><a href="javascript:toHome()"><img border=1 src="images/bar1.png" /></a></td>
             <td id=imgTwo></td>
-            <td><img src="images/bar30.png" /></td>
-            <td><img src="images/bar4.png" onclick="javascript:scanBarCode()" /></td>
+            <td><img border=1 src="images/bar30.png" /></td>
+            <td><img border=1 src="images/bar4.png" onclick="javascript:scanBarCode()" /></td>
         </tr>
     </table>
     
     <div id="homePage" style="display:block;">
         <table border=0 width=100%>
+            <tr><td height=50>&nbsp;</td></tr>
             <tr><td align=center>
 				<img src="images/homeSample.gif" />
+            </td></tr>
+            <tr><td height=100>
+            	<table>
+                    <tr>
+                        <td width=200px>&nbsp;</td>
+                        <td><img src="images/logo.png" /></td>
+                        <td width=50px>&nbsp;</td>
+                    </tr>
+                </table>
             </td></tr>
         </table>
     </div>

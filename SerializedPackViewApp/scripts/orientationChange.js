@@ -11,7 +11,7 @@ function doOnOrientationChange()
             document.getElementById("packInfoPage").style.display="none";
             document.getElementById("packListPage").style.display="block";
         }
-        document.getElementById("imgTwo").innerHTML = "<img src='images/bar22.png' />";
+        document.getElementById("imgTwo").innerHTML = "<img border=1 src='images/bar22.png' />";
 
         var listDivHeight = document.body.offsetHeight
                             - document.getElementById("barTable").offsetHeight;
@@ -23,7 +23,7 @@ function doOnOrientationChange()
             document.getElementById("packInfoPage").style.display="block";
             document.getElementById("packListPage").style.display="none";
         }
-        document.getElementById("imgTwo").innerHTML = "<img src='images/bar2.png' />";
+        document.getElementById("imgTwo").innerHTML = "<img border=1 src='images/bar2.png' />";
         break; 
     }
   }
